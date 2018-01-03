@@ -1,31 +1,31 @@
 package ec.edu.ups.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
 //Entidad Propiedad
 @Entity
 public class Propiedad implements Serializable{
 	
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,7 +65,6 @@ public class Propiedad implements Serializable{
 	// relacion bidireccional muchas propiedades pueden pertenecer a una categoria
 	@ManyToOne
 	@JoinColumn(name="categoria")
-
 	private Categoria categoria;
 	
 	
@@ -74,7 +73,9 @@ public class Propiedad implements Serializable{
 	
 	private double latitud;
 	
-	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="propiedad", referencedColumnName="codigo")
+	private List<Imagen> imagenes;
 
 // getters and setters
 	public int getCodigo() {
@@ -207,5 +208,27 @@ public class Propiedad implements Serializable{
 	}
 
 
+	
+
+	public List<Imagen> getImagenes() {
+		return imagenes;
+	}
+
+
+	public void setImagenes(List<Imagen> imagenes) {
+		this.imagenes = imagenes;
+	}
+
+
+	//metodo que me permite agregar varios telefonos
+	public void addImagen(Imagen img){
+		if (imagenes==null)
+			imagenes = new ArrayList<Imagen>();
+			imagenes.add(img);
+			
+		
+	
+	}
+	
 	
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,10 +33,10 @@ public class Imagen implements Serializable{
 	@Size(min=1, max=100) //Validacion de tamaño de campo en bd
 	private String descripcionImagen;
 	
-	@NotNull //Validacion de valor no nulo en campo en bd
-	@NotEmpty //Validacion de valor no vacio en campo en bd
-	private String pathImagen;
-
+	@Lob
+	@Column(name="img")
+	private byte[] img;
+	
 	public String getNombreImagen() {
 		return nombreImagen;
 	}
@@ -60,12 +61,14 @@ public class Imagen implements Serializable{
 		this.descripcionImagen = descripcionImagen;
 	}
 
-	public String getPathImagen() {
-		return pathImagen;
+	public byte[] getImg() {
+		return img;
 	}
 
-	public void setPathImagen(String pathImagen) {
-		this.pathImagen = pathImagen;
+	public void setImg(byte[] img) {
+		this.img = img;
 	}
+
+	
 	
 }

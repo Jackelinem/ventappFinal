@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -58,23 +59,9 @@ public class Persona implements Serializable {
 	@Column (name="per_fecha", length=10)
 	private Date fecha;
 	
-	
-
-	
-
-	@Size(min=4,max=50)
-	@Column (name="per_direccion", length=10)
-	private String direccion;
-	
-	@Email
-	@Column(name="per_email",unique=true)
-	//@UniqueConstraint(columnNames = { "email" })
-	private String email;
-	
-	@Column(name="per_clave")
-	private String password;
-	
-	
+	@ManyToOne
+	@JoinColumn(name="rol")
+	private Rol rol;
 	
 	//relacion uno a muchos una persona puede tener varios telefonos
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -86,13 +73,32 @@ public class Persona implements Serializable {
 	@JoinColumn(name="Persona", referencedColumnName="codigo")
 	private Set<Propiedad> propiedades=new HashSet<>();
 	
+
+	@Size(min=4,max=50)
+	@Column (name="per_direccion", length=10)
+	private String direccion;
+	
+	@Email
+	@Column(name="per_email",unique=true)
+	private String email;
+	
+	@Column(name="per_clave")
+	private String password;
+	
+	
 	///getter and setter
 
 	
-	
-	
 	public int getCodigo() {
 		return codigo;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	public Set<Telefono> getTelefonos() {

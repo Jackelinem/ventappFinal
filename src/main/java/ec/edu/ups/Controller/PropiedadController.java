@@ -1,6 +1,7 @@
 package ec.edu.ups.Controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,16 +10,21 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
+
+import com.lowagie.text.pdf.codec.Base64;
 
 import ec.edu.ups.Dao.CategoriaDao;
 import ec.edu.ups.Dao.PersonaDao;
 import ec.edu.ups.Dao.PropiedadDao;
 import ec.edu.ups.Dao.ProvinciaDAO;
 import ec.edu.ups.Model.Categoria;
+import ec.edu.ups.Model.Imagen;
 import ec.edu.ups.Model.Persona;
 import ec.edu.ups.Model.Propiedad;
 import ec.edu.ups.Model.Provincia;
 import ec.edu.ups.Model.Sector;
+import ec.edu.ups.Model.Telefono;
 
 /*
  * controlador de propiedad
@@ -67,6 +73,10 @@ public class PropiedadController {
 	private List<SelectItem> listaCategorias;
 	private String cat;
 	
+	//imagen
+	private Part file;
+	private String descImg;
+	
 	@Inject
 	private PropiedadDao propiedadDao;
 	
@@ -87,13 +97,14 @@ public class PropiedadController {
 		sector=new Sector();
 		propiedad =new Propiedad();
 		categoria=new Categoria();
-		sector.addPropiedadr(new Propiedad());
+		//sector.addPropiedadr(new Propiedad());
 		listaSectores= new ArrayList<SelectItem>();
 		
 		//carga los combos
 		cargarProvincias();
 		cargarCategorias();
 		//carga la propiedad
+		//propiedad.addImagen(new Imagen());
 		loadPropiedades();
 	}
 
@@ -128,7 +139,8 @@ public class PropiedadController {
 	public String loadDatosEditar(int codigo) {
 		
 		propiedad =propiedadDao.leer(codigo);
-		return"EditarPropiedad";
+		System.out.println(propiedad.getDescripcion()+" tiene imagenes "+propiedad.getImagenes().size());
+		return "EditarPropiedad";
 	}
 	
 
@@ -138,7 +150,15 @@ public class PropiedadController {
  */
 	private void loadPropiedades() {
 		
-	listpropiedades=propiedadDao.listadoPropiedades();
+		listpropiedades=propiedadDao.listadoPropiedades();
+		for (int i = 0; i < listpropiedades.size(); i++) {
+			System.out.println(listpropiedades.get(i).getCodigo()+"" +listpropiedades.get(i).getDescripcion());
+			
+			if(listpropiedades.get(i).getCodigo()==9) {
+				System.out.println("imagen " +listpropiedades.get(i).getImagenes().get(0).getDescripcionImagen());
+			}
+			
+		}
 	}
 	
 	
@@ -259,12 +279,66 @@ public class PropiedadController {
 	 */
 	public String savePropiedad() {
 		System.out.println("Sector alias"+propiedad.getCategoria().getDescripcion());
+		
 		propiedadDao.guardar(propiedad);
 		init();
 		return null;
 	}
 	
+	public String agregaImagenes(){
+		try{
+			
+			byte[] b = new byte[(int) file.getSize()];
+			file.getInputStream().read(b);
+			Imagen img=new Imagen();
+			img.setDescripcionImagen(descImg);
+			img.setImg(b);
+			//if (propiedad.getImagenes().isEmpty()) {
+				//
+				propiedad.addImagen(img);
+				System.out.println("Imagenes "+propiedad.getImagenes().size());
+			/*}else {
+				System.out.println("Imagenes "+propiedad.getImagenes().size());
+				propiedad.getImagenes().add(img);
+			}*/
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
+	public String toBase64(Propiedad p){
+		try {
+			byte [] b=p.getImagenes().get(0).getImg();
+			return "data:image/jpg;base64,"+Base64.encodeBytes(b);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
+	
+	public String imageToBase64(byte [] b){
+		try {
+			return "data:image/jpg;base64,"+Base64.encodeBytes(b);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
+	public String irAPropiedad(Propiedad p){
+		try {
+			this.propiedad=p;
+			return "PropiedadDetalle";
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
+	}
+
 	
 	//getters and setters
 	
@@ -511,6 +585,26 @@ public class PropiedadController {
 
 	public void setCatDao(CategoriaDao catDao) {
 		this.catDao = catDao;
+	}
+
+
+	public String getDescImg() {
+		return descImg;
+	}
+
+
+	public void setDescImg(String descImg) {
+		this.descImg = descImg;
+	}
+
+
+	public Part getFile() {
+		return file;
+	}
+
+
+	public void setFile(Part file) {
+		this.file = file;
 	}
 
 	

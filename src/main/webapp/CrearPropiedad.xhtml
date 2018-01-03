@@ -8,7 +8,7 @@
 				
 				<ui:define name="contenido">
 	
-	<h:form id="formulario" class="form-horizontal">
+	<h:form id="formulario" class="form-horizontal" enctype="multipart/form-data" >
 	<div class="control-group">
 			<h:outputLabel class="control-label" value="direccion:"  for="direccion"/>
 				<div class="controls">
@@ -59,21 +59,7 @@
 			<h:message for="costo"/>
 		</div>
 		
-		<div class="control-group">
-			<h:outputLabel class="control-label" value="latitud"  for="latitud"/>
-			<div class="controls">
-			<h:inputText class="span11" value="#{propiedadController.propiedad.latitud}" id="latitud" />
-			</div>
-			<h:message for="latitud"/>
-		</div>
 		
-		<div class="control-group">
-			<h:outputLabel class="control-label" value="longuitud"  for="longuitud"/>
-			<div class="controls">
-			<h:inputText class="span11" value="#{propiedadController.propiedad.longuitud}" id="longuitud" />
-			</div>
-			<h:message for="longuitud"/>
-		</div>
 		
 		
 		<div class="control-group">
@@ -125,8 +111,70 @@
 		</div>
 		<h:message for="codigoCli"/>
 		</div>
+		
+		<div class="control-group"> 
+		<h:outputLabel class="control-label" value=" Imagenes "  />
+		<h:outputLabel class="control-label" value="Descripcion"  />
+		<div class="controls">
+			<h:inputText value="#{propiedadController.descImg}" id="desImg" />
+			 <p style="color:white;" class="setting"><span>Imagen </span> <h:inputFile id="img"  value="#{propiedadController.file}"/><!-- <h:commandButton value="cargar" action="#{tourVirtualON.cargar()}" ></h:commandButton>--></p>
+	        <!-- <o:graphicImage id="iv" class="image" value="#{tourVirtualON.base64image}" style="height: 80px; width: 90px" /> -->
+			<h:commandButton class="btn btn-success" action="#{propiedadController.agregaImagenes()}" value="CARGAR IMAGEN" >
+				<f:ajax render="tabImg" execute="desImg img"></f:ajax>
+			</h:commandButton>
+			
+		</div>
+		</div>
+		
+		<div class="widget-content nopadding">
+            <h:dataTable id="tabImg" class="table table-bordered table-striped" var="imagen" value="#{propiedadController.propiedad.imagenes}" styleClass="employeeTable"
+					         headerClass="employeeTableHeader"
+					         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center">
+							<h:column>
+							<center>
+							<f:facet name="header">Codigo</f:facet>
+							#{imagen.codigoImagen}
+							</center>
+							</h:column>
+							
+							<h:column>
+							<center>
+							<f:facet name="header">Descripcion</f:facet>
+							#{imagen.descripcionImagen}
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">Eliminar</f:facet>
+							<h:commandButton value="Eliminar" class="btn btn-danger">
+							<f:ajax execute="tabImg"></f:ajax>
+							</h:commandButton>
+							</center>
+							</h:column>
+						</h:dataTable>
+			
+          </div>
+		
+		
+		<div class="control-group">
+			<h:outputLabel class="control-label" value="latitud"  for="latitud"/>
+			<div class="controls">
+			<h:inputText class="span11" value="#{propiedadController.propiedad.latitud}" id="latitud" />
+			</div>
+			<h:message for="latitud"/>
+		</div>
+		
+		<div class="control-group">
+			<h:outputLabel class="control-label" value="longuitud"  for="longuitud"/>
+			<div class="controls">
+			<h:inputText class="span11" value="#{propiedadController.propiedad.longuitud}" id="longuitud" />
+			</div>
+			<h:message for="longuitud"/>
+		</div>
+		
+		
 		<div>
-			<h:outputLabel value="Adaptacion de mapa a jsf " />
+			<h:outputLabel value="Selecciona la ubicacion en el mapa " />
 				<style>
 			      		#map {
 			      			height: 450px;
