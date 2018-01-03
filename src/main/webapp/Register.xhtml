@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+<head>
+        <title>Matrix Admin</title><meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="resources/resourcescss/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="resources/css/matrix-login.css" />
+        <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
+
+</head>
+					
+					<body>
+						<div id="loginbox"> 
+						
+							<div class="control-group normal_text"> <h3><img src="resources/img/logo.png" alt="Logo" /></h3> <h3> Create a Count </h3></div>
+		
+					
+										<h:form >
+											<h:message globalOnly="true"/>
+						               	<div class="container-fluid">
+									   			
+									   			<div class="container-fluid">
+									
+													
+													
+															<div class="controls">
+															<label class="control-label" for="nombres">Nombre :</label>
+															<h:inputText value="#{personaControlador.persona.nombres}" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres letras.">
+															<f:validateRegex pattern="[a-zA-Z]+"/>
+															</h:inputText>
+															<h:message for="nombres"/>
+															</div>
+														
+													
+													</div>
+													
+													<div class="container-fluid">
+														<label class="control-label">Apellido :</label>
+													
+															<div class="controls">
+														 <h:inputText class="form-control" value="#{personaControlador.persona.apellido}" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres alfanuméricos.">
+														 <f:validateRegex pattern="[a-zA-Z]+"/>
+														 </h:inputText>
+														</div>
+														
+													<h:message for="apellido"/>
+													
+													</div>
+													
+													
+													
+													<div class="container-fluid">
+														<label class="control-label">Fecha Nacimiento (yyyy/mm/dd):</label>
+													
+															<div class="controls">
+																<h:inputText  class="form-control" value="#{personaControlador.persona.fecha}" required="true" requiredMessage="El campo está vacío." >
+																
+																<f:convertDateTime pattern="yyyy/mm/dd"/>
+															
+																</h:inputText>
+																<h:message for="fecha"/>
+															</div>
+													</div>
+													
+													
+													
+													
+													<div class="container-fluid">
+														<label class="control-label">Direccion:</label>
+													
+															<div class="controls">
+													
+															 <h:inputText class="form-control"  value="#{personaControlador.persona.direccion}" required="true" requiredMessage="El campo está vacío." >
+															 <f:validateRegex pattern="[a-zA-Z0-9]+"/>
+															  
+													          
+																<h:message for="direccion"/>
+																</h:inputText>
+															</div>
+													</div>
+													
+													<div class="container-fluid">
+														<label class="control-label">Email:</label>
+													
+															<div class="controls">
+													          <h:inputText class="form-control"  value="#{personaControlador.persona.email}" required="true" requiredMessage="El campo está vacío." />
+													         
+													          <h:message for="email"/>
+													        </div>
+													    </div>      
+													
+													
+													<div class="container-fluid">
+														<label class="control-label">Password:</label>
+													
+															<div class="controls">
+																<h:inputSecret  class="form-control"  value="#{personaControlador.persona.password}" required="true" requiredMessage="El campo está vacío." />
+																<h:message for="password"/>
+															</div>
+																			
+													</div>
+													
+													<div class="form-actions">
+													
+												   <h:commandButton class="btn btn-info" action="#{personaControlador.agregaTelefono()}" value="Agregar Telefono" />
+												   
+												
+												<P> </P>
+												
+												
+												<h:dataTable class="table table-bordered table-striped" id ="tblTel" headerClass="employeeTableHeader"
+									         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center" 
+									         value="#{personaControlador.persona.telefonos}" var="telefono">
+												
+												<h:column><center>
+												 <f:facet name="header">Telefono</f:facet>
+												 <h:inputText value="#{telefono.numero}" />
+												 </center>
+												</h:column>
+												
+												<h:column><center>
+												 <f:facet name="header">Tipo: </f:facet>
+												 <h:inputText value="#{telefono.tipo}" />
+												 </center>
+												</h:column>
+												
+												<h:column><center>
+												 <f:facet name="header">Acciones</f:facet>
+												 <h:commandButton action="#{personaControlador.eliminarTelefono(telefono)}" value="Eliminar" />
+												 </center>
+												</h:column>
+												
+												<p> </p> <p> </p>
+												</h:dataTable>
+												
+												
+												</div>
+												
+												
+												<div class="form-actions">
+						
+													<span class="pull-left">
+												
+													 <h:commandButton class="btn btn-success" action="#{personaControlador.guardar()}" value="Guardar" />
+												 
+												</span>
+												
+												
+												<span class="pull-right">
+											<h:commandButton action="Login.xhtml" value=" volver "  class="btn-warning"/>
+										</span>
+												
+												</div>
+												
+											</div>
+										 
+									</h:form>
+									
+					</div>				
+				</body>
+	</html>

@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateForm.xhtml">
+			
+		
+			
+			<ui:define name="titulo">MANTENIMIENTO DE SECTORES</ui:define>
+			<ui:define name="contenido">
+			<f:metadata>
+
+			<f:viewParam name="id" value="#{provinciaControlador.id}" />
+			
+			</f:metadata>
+          <h:form  class="form-horizontal">
+          	<div class="control-group">
+              <label class="control-label">Codigo :</label>
+              <div class="controls">
+                <h:inputText class="span11" value="#{provinciaControlador.provincia.codigo}" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Nombre :</label>
+              <div class="controls">
+                <h:inputText class="span11" value="#{provinciaControlador.provincia.nombre}" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Alias :</label>
+              <div class="controls">
+              	<h:inputText class="span11" value="#{provinciaControlador.provincia.alias}" />
+              </div>
+            </div>
+            <div class="form-actions">
+			<h:commandButton class="btn btn-success" value="AGREGAR SECTOR" action="#{provinciaControlador.agregaSector()}"/>	
+            </div>
+            
+            <h:dataTable value="#{provinciaControlador.provincia.sectores}" var="sector">
+
+				<h:column>
+				 <f:facet name="header">Nombre</f:facet>
+				 <h:inputText value="#{sector.nombre}" />
+				</h:column>
+				
+				<h:column>
+				 <f:facet name="header">Alias</f:facet>
+				 <h:inputText value="#{sector.alias}" />
+				</h:column>
+				
+				
+				</h:dataTable>
+            
+            
+            <div class="form-actions">
+			<h:commandButton class="btn btn-success" value="GUARDAR" action="#{provinciaControlador.guardar()}"/>	
+			
+            </div>
+        
+            <div>
+        		<h:commandButton class="btn btn-info" value="SALIR" action="index.xhtml"/>
+        	</div>
+            
+          </h:form>
+			
+		</ui:define>
+</ui:composition>
+

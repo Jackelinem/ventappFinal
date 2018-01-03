@@ -1,0 +1,142 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateForm.xhtml">
+				
+				<ui:define name="titulo">Publicar Propiedad</ui:define>
+				
+				<ui:define name="contenido">
+				<f:metadata>
+
+				<f:viewParam name="id" value="#{personaControlador.id}" />
+				
+				</f:metadata>
+	<h:form>
+											
+						               	<div class="container-fluid">
+									   			
+									   			<div class="container-fluid">
+									
+													<label class="control-label">Nombre :</label>
+													
+															<div class="controls">
+															<h:inputText value="#{personaControlador.persona.nombres}" />
+															</div>
+														<h:message for="nombres"/>
+													
+													</div>
+													
+													<div class="container-fluid">
+														<label class="control-label">Apellido :</label>
+													
+															<div class="controls">
+														 <h:inputText class="form-control" value="#{personaControlador.persona.apellido}" />
+														</div>
+													<h:message for="apellido"/>
+													</div>
+													
+													
+													
+													<div class="container-fluid">
+														<label class="control-label">Fecha (yyyy/mm/dd):</label>
+													
+															<div class="controls">
+																<h:inputText  class="form-control" value="#{personaControlador.persona.fecha}" >
+																<f:convertDateTime pattern="yyyy/mm/dd"/>
+															
+																</h:inputText>
+																<h:message for="fecha"/>
+																	</div>
+													</div>
+													
+													
+													
+													
+													<div class="container-fluid">
+														<label class="control-label">Direccion:</label>
+													
+															<div class="controls">
+													
+															 <h:inputText class="form-control"  value="#{personaControlador.persona.direccion}" />
+																<h:message for="direccion"/>
+															</div>
+													</div>
+													
+													<div class="container-fluid">
+														<label class="control-label">Email:</label>
+													
+															<div class="controls">
+													          <h:inputText class="form-control"  value="#{personaControlador.persona.email}" />
+													          <h:message for="email"/>
+													        </div>
+													    </div>      
+													
+													
+													<div class="container-fluid">
+														<label class="control-label">Password:</label>
+													
+															<div class="controls">
+																<h:inputText class="form-control"  value="#{personaControlador.persona.password}" />
+																<h:message for="password"/>
+															</div>
+													</div>
+													
+													<div class="form-actions">
+													
+												   <h:commandButton class="btn btn-info" action="#{personaControlador.agregaTelefono()}" value="Agregar Telefono" />
+												   
+												
+												<P> </P>
+												
+												
+												<h:dataTable class="table table-bordered table-striped" id ="tblTel" headerClass="employeeTableHeader"
+									         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center" 
+									         value="#{personaControlador.persona.telefonos}" var="telefono">
+												
+												<h:column><center>
+												 <f:facet name="header">Telefono</f:facet>
+												 <h:inputText value="#{telefono.numero}" />
+												 </center>
+												</h:column>
+												
+												<h:column><center>
+												 <f:facet name="header">Tipo: </f:facet>
+												 <h:inputText value="#{telefono.tipo}" />
+												 </center>
+												</h:column>
+												
+												<h:column><center>
+												 <f:facet name="header">Acciones</f:facet>
+												 <h:commandButton action="#{personaControlador.eliminarTelefono(telefono)}" value="Eliminar" />
+												 </center>
+												</h:column>
+												
+												<p> </p> <p> </p>
+												</h:dataTable>
+												
+												
+												</div>
+												
+												
+												<div class="form-actions">
+						
+													<span class="pull-left">
+												
+													 <h:commandButton class="btn btn-success" action="#{personaControlador.editarPersona()}" value="Guardar" />
+													
+												</span>
+												
+												
+												<span class="pull-right">
+											<h:commandButton action="Login.xhtml" value=" volver "  class="btn-warning"/>
+										</span>
+												
+												</div>
+												
+											</div>
+										 
+									</h:form>
+		</ui:define>
+
+</ui:composition>

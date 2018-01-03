@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+			<!-- registrar Provincias -->
+			<ui:define name="titulo">MANTENIMIENTO DE IMAGENES</ui:define>
+			<ui:define name="contenido"> 
+<f:metadata> <!-- Codigo para leer parametro -->
+	<f:viewParam name="id" value="#{imagenController.id}"/>
+</f:metadata>
+	<h:form>
+	<h:messages globalOnly="true"/>
+	<h:inputText value="#{imagenController.id}" />
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Codigo:" for="codigoImagen"/>
+			<h:inputText value="#{imagenController.imagen.codigoImagen}" id="codigoImagen"/>
+			<h:message for="codigoImagen"/>
+			
+			<h:outputLabel value="Nombre:" for="nombreImagen"/>
+			<h:inputText value="#{imagenController.imagen.nombreImagen}" id="nombreImagen"/>
+			<h:message for="nombreImagen"/>
+			
+			<h:outputLabel value="Descripcion:" for="descripcionImagen"/>
+			<h:inputText value="#{imagenController.imagen.descripcionImagen}" id="descripcionImagen"/>
+			<h:message for="descripcionImagen"/>
+			
+			<h:outputLabel value="Path:" for="pathImagen"/>
+			<h:inputText value="#{imagenController.imagen.pathImagen}" id="pathImagen"/>
+			<h:message for="pathImagen"/>
+			
+			<h:commandButton action="#{imagenController.guardar()}" value="Guardar"  />
+		</h:panelGrid>
+		
+		<h:commandButton action="listadoimagenes" value="Listado" immediate="true"/>
+	</h:form>
+</ui:define>
+			</ui:composition>

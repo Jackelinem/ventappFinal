@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<!-- registrar Provincias -->
+			<ui:define name="titulo">CREAR IMAGENES</ui:define>
+			<ui:define name="contenido"> 
+	<h:form>
+		<h:messages globalOnly="true"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Codigo:" for="codigoCiudad"/>
+			<h:inputText value="#{ciudadController.ciudad.codigoCiudad}" id="codigoCiudad"/>
+			<h:message for="codigoCiudad"/>
+			
+			<h:outputLabel value="Nombre:" for="nombreCiudad"/>
+			<h:inputText value="#{ciudadController.ciudad.nombreCiudad}" id="nombreCiudad" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres alfabéticos."> 
+				<f:validateRegex pattern="[a-zA-Z]+"/>
+			</h:inputText>
+			<h:message for="nombreCiudad"/>
+			
+			<h:commandButton action="#{ciudadController.guardar()}" value="Guardar"  />
+		</h:panelGrid>
+		
+		<h:commandButton action="listadociudades" value="Listado" immediate="true"/>
+	</h:form>
+</ui:define>
+			</ui:composition>

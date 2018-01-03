@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateForm.xhtml">
+			
+		
+			
+			<ui:define name="titulo">MANTENIMIENTO DE SECTORES</ui:define>
+			<ui:define name="contenido">
+          <h:form  class="form-horizontal">
+            
+            <div class="widget-box">
+          <div class="widget-title">
+            <h5>SECTORES REGISTRADOS</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <h:dataTable id="tblProv" class="table table-bordered table-striped" var="sec" value="#{provinciaControlador.provincias}" styleClass="employeeTable"
+					         headerClass="employeeTableHeader"
+					         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center">
+							<h:column>
+							<center>
+							<f:facet name="header">Codigo</f:facet>
+							#{sec.codigo}
+							</center>
+							</h:column>
+							
+							<h:column>
+							<center>
+							<f:facet name="header">Nombre</f:facet>
+							#{sec.nombre}
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">DDescripcion</f:facet>
+							#{sec.alias}
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							
+								 <f:facet name="header">Acciones</f:facet>
+								 <a href="EditarSector.xhtml?id=#{sec.codigo}">Editar</a>
+						
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">Eliminar</f:facet>
+							<h:commandButton value="Eliminar" class="btn btn-danger" action="#{provinciaControlador.eliminarDatos(sec.codigo)}"/>
+							</center>
+							</h:column>
+						</h:dataTable>
+			
+          </div>
+          
+        </div>
+            <div>
+        		<h:commandButton class="btn btn-info" value="SALIR" action="index.xhtml"/>
+        	</div>
+            
+          </h:form>
+			
+		</ui:define>
+</ui:composition>
+

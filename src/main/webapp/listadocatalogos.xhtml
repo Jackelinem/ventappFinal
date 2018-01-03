@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<!-- registrar CATALOGOS -->
+			<ui:define name="titulo">LISTADO DE CATALOGOS</ui:define>
+			<ui:define name="contenido"> 
+<h:form>
+<h:outputText value="No existen registros" rendered="#{empty catalogoController.catalogos}"/>
+<br></br>
+	<h:dataTable value="#{catalogoController.catalogos}" var="catalogo"  rendered="#{not empty catalogoController.catalogos}"> <!--Rendered, si quiero se muestre  -->
+		<h:column>
+			<f:facet name="header">Codigo</f:facet>
+			#{catalogo.codigoCatalogo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+			#{catalogo.nombreCatalogo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Fecha Inicio</f:facet>
+			#{catalogo.fechaInicioCatalogo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Fecha Fin</f:facet>
+			#{catalogo.fechaFinCatalogo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Estado</f:facet>
+			#{catalogo.estadoCatalogo}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton action="#{catalogoController.loadDatosEditar(catalogo.codigoCatalogo)}" value="Editar" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton action="#{catalogoController.eliminar(catalogo.nombreCatalogo)}" value="Borrar" />
+		</h:column>
+	</h:dataTable>
+	<h:commandButton action="crearcatalogo" value="Crear nuevo catalogo" />
+</h:form>
+</ui:define>
+</ui:composition>

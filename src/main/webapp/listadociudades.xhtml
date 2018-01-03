@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<!-- registrar Provincias -->
+			<ui:define name="titulo">LISTADO DE IMAGENES</ui:define>
+			<ui:define name="contenido"> 
+<h:form>
+<h:outputText value="No existen registros" rendered="#{empty ciudadController.ciudades}"/>
+<br></br>
+	<h:dataTable value="#{ciudadController.ciudades}" var="ciudad"  rendered="#{not empty ciudadController.ciudades}"> <!--Rendered, si quiero se muestre  -->
+		<h:column>
+			<f:facet name="header">Codigo</f:facet>
+			#{ciudad.codigoCiudad}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+			#{ciudad.nombreCiudad}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton action="#{ciudadController.loadDatosEditar(ciudad.codigoCiudad)}" value="Editar" />
+			<a href="editarciudad.xhtml?id=#{ciudad.codigoCiudad}">Editar</a> <!-- Enviar parametro la cedula -->
+		</h:column>
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton action="#{ciudadController.eliminar(ciudad.nombreCiudad)}" value="Borrar" />
+		</h:column>
+	</h:dataTable>
+	<h:commandButton action="crearciudad" value="Crear nueva ciudad" />
+</h:form>
+</ui:define>
+</ui:composition>

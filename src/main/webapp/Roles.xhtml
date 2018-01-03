@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<ui:define name="titulo"><h2 align="center"> Agregar un nuevo rol</h2> </ui:define>
+			<ui:define name="contenido">	<p></p>
+			
+		<h:form>
+		<div class="container-fluid">
+					
+					
+							<div class="control-group">
+						<h:panelGrid  colums="3">
+									
+							<h:outputLabel value="Nuevo Rol"  for="rol"  class = "label label-info" />
+							 <div class="controls">
+							 
+							<h:inputText value="#{rolController.rol.tipo}" id="rol"  class="span11"/>
+							</div>
+							<h:message for="rol"/>
+					
+							<h:commandButton action="#{rolController.guardar()}" value="guardar"  class=" btn btn-block btn-success">
+								<f:ajax excecute="rol" />
+							</h:commandButton>
+							</h:panelGrid>
+					
+						</div>
+					
+				
+		
+		
+
+				<p></p> <h2 align="center"> Roles actuales</h2>
+						<h:dataTable  class="table table-bordered table-striped" id ="tblRol" headerClass="employeeTableHeader"
+									         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center"
+						 value="#{rolController.listRoles}" var="rol"  rendered="#{not empty rolController.rol}"> <!--Rendered, si quiero se muestre  -->
+						
+						<h:column>
+							<center>
+							<f:facet name="header">Codigo</f:facet>
+							
+							#{rol.codigo}
+							</center>
+						</h:column>
+						
+						<h:column><center>
+							<f:facet name="header">Rol</f:facet>
+							#{rol.tipo}
+							</center>
+						</h:column>
+						
+						<h:column><center>
+							<f:facet name="header">Acciones</f:facet>
+							<h:commandButton action="#{rolController.loadDatosEditar(rol.codigo)}" value="Editar" class = "btn btn-warning"/>
+							</center>
+						</h:column>
+						
+								
+						
+						<h:column><center>
+							<f:facet name="header">Acciones</f:facet>
+							<h:commandButton action="#{rolController.eliminar(rol.codigo)}" value="Borrar"  class = "btn btn-danger" />
+							</center>
+						</h:column>
+					
+					
+						
+					</h:dataTable>
+			</div>	
+</h:form>
+
+</ui:define>
+</ui:composition>

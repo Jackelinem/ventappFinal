@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<!-- registrar CATALOGOS -->
+			<ui:define name="titulo">CREAR CATALOGOS</ui:define>
+			<ui:define name="contenido"> 
+	<h:form>
+		<h:messages globalOnly="true"/>
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Codigo:" for="codigoCatalogo"/>
+			<h:inputText value="#{catalogoController.catalogo.codigoCatalogo}" id="codigoCatalogo"/>
+			<h:message for="codigoCatalogo"/>
+			
+			<h:outputLabel value="Nombre:" for="nombreCatalogo"/>
+			<h:inputText value="#{catalogoController.catalogo.nombreCatalogo}" id="nombreCatalogo" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres alfabéticos."> 
+				<f:validateRegex pattern="[a-zA-Z]+"/>
+			</h:inputText>
+			<h:message for="nombreCatalogo"/>
+			
+			<h:outputLabel value="Fecha Inicio:" for="fechaInicioCatalogo"/>
+			<h:inputText value="#{catalogoController.catalogo.fechaInicioCatalogo}" id="fechaInicioCatalogo" required="true" requiredMessage="El campo está vacío."> 
+				<f:convertDateTime pattern="dd/mm/yyyy"/>
+			</h:inputText>
+			<h:message for="fechaInicioCatalogo"/>
+			
+			<h:outputLabel value="Fecha Finalizacion:" for="fechaFinCatalogo"/>
+			<h:inputText value="#{catalogoController.catalogo.fechaFinCatalogo}" id="fechaFinCatalogo" required="true" requiredMessage="El campo está vacío."> 
+				<f:convertDateTime pattern="dd/mm/yyyy"/>
+			</h:inputText>
+			<h:message for="fechaFinCatalogo"/>
+			
+			<h:outputLabel value="Estado:" for="estadoCatalogo"/>
+			<h:inputText value="#{catalogoController.catalogo.estadoCatalogo}" id="estadoCatalogo" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres numericos enteros entre 0 y 1."> 
+				<f:validateRegex pattern="[0-1]+"/>
+			</h:inputText>
+			<h:message for="estadoCatalogo"/>
+			
+			<h:commandButton action="#{catalogoController.guardar()}" value="Guardar"  />
+		</h:panelGrid>
+		
+		<h:commandButton action="listadocatalogos" value="Listado" immediate="true"/>
+	</h:form>
+</ui:define>
+			</ui:composition>

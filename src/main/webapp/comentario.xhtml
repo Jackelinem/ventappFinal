@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/resources/templateForm.xhtml">
+	<ui:define name="titulo">COMENTARIOS</ui:define>
+			<ui:define name="contenido">
+			<head>
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2}
+
+#customers tr:hover {background-color: #47C664;}
+
+#customers th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #5A619F;
+    color: white;
+}
+</style>
+</head>
+          <h:form  class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label">Comenta................. :</label>
+              <div class="controls">
+	              <textarea class="textarea_editor span11" rows="6" placeholder="Enter text ..." value="#{comentarioController.com.comentario}"></textarea>
+                <h:inputText class="span11" value="#{comentarioController.com.comentario}" />
+              </div>
+            </div>
+            <div class="form-actions">
+			<h:commandButton class="btn btn-success" value="ENVIAR" action="#{comentarioController.guardarComentario()}"/>	
+            </div>
+            
+            <div class="widget-box">
+	          <div class="widget-title">
+	            <h5>Comentarios </h5>
+	          </div>
+	          	<div class="widget-content nopadding">
+			            <h:dataTable id="customers" var="com" value="#{comentarioController.listComentarios}" styleClass="employeeTable"
+					         headerClass="employeeTableHeader"
+					         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center">
+								<h:column>
+								<center><f:facet name="header"> ID   </f:facet>
+								#{com.id}</center>
+								</h:column>
+								<h:column>
+								<center>
+								<f:facet name="header">  Comentarios             </f:facet>
+								#{com.comentario}</center>
+								</h:column>
+								<h:column> <center>
+								<f:facet name="header">Eliminar</f:facet>
+								<h:commandButton class="btn btn-danger"  value="Eliminar" action="#{comentarioController.eliminarComentario(com.id)}"/>
+									</center>
+								</h:column>
+						</h:dataTable>			
+	          </div>
+	          
+        	</div>
+        	
+        	<div>
+        		<h:commandButton class="btn btn-info" value="SALIR" action="index.xhtml"/>
+        	</div>
+            
+          </h:form>
+			
+		</ui:define>
+	
+	</ui:composition>
+</html>

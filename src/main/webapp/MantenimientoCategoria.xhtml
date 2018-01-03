@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateForm.xhtml">
+			
+		
+			
+			<ui:define name="titulo">MANTENIMIENTO DE LAS  CATEGORIAS</ui:define>
+			<ui:define name="contenido">
+          <h:form  class="form-horizontal">
+          <h:message globalOnly="true"/>
+            <div class="control-group">
+              <label class="control-label">Nueva Categoria :</label>
+              <div class="controls">
+                <h:inputText class="span11" value="#{categoriaController.categoria.alias}" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres letras." >
+              	 <f:validateRegex pattern="[a-zA-Z]+"/>
+				</h:inputText>
+				<h:message for="alias"/>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Descripcion:</label>
+              <div class="controls">
+              	<h:inputText class="span11" value="#{categoriaController.categoria.descripcion}"/>
+              </div>
+            </div>
+            <div class="form-actions">
+			<h:commandButton class="btn btn-success" value="GUARDAR" action="#{categoriaController.guardarCategoria()}"/>
+				
+            </div>
+            
+            <div class="widget-box">
+          <div class="widget-title">
+            <h5>SECTORES REGISTRADOS</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <h:dataTable id="tabCat" class="table table-bordered table-striped" var="cat" value="#{categoriaController.listCategorias}" styleClass="employeeTable"
+					         headerClass="employeeTableHeader"
+					         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center">
+							<h:column>
+							<center>
+							<f:facet name="header">Codigo</f:facet>
+							#{cat.codigo}
+							</center>
+							</h:column>
+							
+							<h:column>
+							<center>
+							<f:facet name="header">Alias</f:facet>
+							#{cat.alias}
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">Descripcion</f:facet>
+							#{cat.descripcion}
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">Editar</f:facet>
+							<h:commandButton class="btn btn-primary" value="Editar" action="#{categoriaController.actualizarCategoria(cat.codigo)}"/>
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">Eliminar</f:facet>
+							<h:commandButton value="Eliminar" class="btn btn-danger" action="#{categoriaController.eliminarCategoria(cat.codigo)}">
+							<f:ajax execute="tabCat"></f:ajax>
+							</h:commandButton>
+							</center>
+							</h:column>
+						</h:dataTable>
+			
+          </div>
+          
+        </div>
+            <div>
+        		<h:commandButton class="btn btn-info" value="SALIR" action="index.xhtml"/>
+        	</div>
+            
+          </h:form>
+			
+		</ui:define>
+</ui:composition>
+

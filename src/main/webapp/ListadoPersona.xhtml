@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateForm.xhtml">
+				
+				<ui:define name="titulo">Listado Personas</ui:define>
+				
+				<ui:define name="contenido">
+				
+	<h:form>
+<div class="widget-box">
+<div class="widget-title">
+ <h5>TABLA Personas</h5>
+</div>
+<div class="widget-content nopadding">
+
+<h:outputText value="No existen regitros guardados" rendered="#{empty personaControlador.personas}" />
+<h:dataTable id="tbPersonas" value="#{personaControlador.personas}" var="persona" rendered="#{not empty personaControlador.personas}" 
+styleClass="employeeTable" headerClass="employeeTableHeader"
+rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center">
+
+<h:column>
+<center>
+ <f:facet name="header">Codigo</f:facet>
+ #{persona.codigo}
+</center>
+</h:column>
+<h:column>
+<center>
+ <f:facet name="header">Nombres</f:facet>
+ #{persona.nombres}
+</center>
+</h:column>
+<h:column>
+<center>
+ <f:facet name="header">Apellido</f:facet>
+ #{persona.apellido}
+</center>
+</h:column>
+<h:column>
+<center>
+ <f:facet name="header">Fecha Nacimiento</f:facet>
+ #{persona.fecha}
+</center>
+</h:column>
+<h:column>
+<center>
+ <f:facet name="header">Direccion</f:facet>
+ #{persona.direccion}
+</center>
+</h:column>
+<h:column>
+<center>
+ <f:facet name="header">Email</f:facet>
+ #{persona.email}
+</center>
+</h:column>
+<h:column>
+<center>
+ <f:facet name="header">Acciones</f:facet>
+ <a href="EditarPersona2.xhtml?id=#{persona.codigo}">Editar</a>
+</center>
+</h:column>
+
+<h:column>
+<center>
+ <f:facet name="header">Eliminar</f:facet>
+ <h:commandButton class="btn btn-danger" action="#{personaControlador.eliminarDatos(persona.codigo)}" value="Eliminar" >
+ <f:ajax  render="tbPersonas" ></f:ajax>
+</h:commandButton>
+</center>
+</h:column>
+
+</h:dataTable>
+</div>
+</div>
+
+<h:commandButton class="btn btn-info" action="ListadoPersona" value="Actualizar" />
+
+</h:form>
+
+		</ui:define>
+
+</ui:composition>

@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateForm.xhtml">
+				
+				<ui:define name="titulo">Editar Propiedad</ui:define>
+				
+				<ui:define name="contenido">
+				
+	<h:form>
+<h:outputText value="No existen registros" rendered="#{empty propiedadController.propiedad}"/>
+<br></br>
+	<h:dataTable id="tabProv" class="table table-bordered table-striped"  styleClass="employeeTable" headerClass="employeeTableHeader"  rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center"
+	value="#{propiedadController.listpropiedades}" var="propiedad"  rendered="#{not empty propiedadController.propiedad}"> <!--Rendered, si quiero se muestre  -->
+		
+		<h:column>
+		<center>
+			<f:facet name="header">Codigo</f:facet>
+			#{propiedad.codigo}
+			
+		</center>
+			
+		</h:column>
+		
+		<h:column>
+			<center>
+			<f:facet name="header">Direccion</f:facet>
+			#{propiedad.direccion}
+			</center>
+		</h:column>
+		
+		<h:column>
+			<center>
+			<f:facet name="header">Url video</f:facet>
+			#{propiedad.urlVideo}
+			</center>
+		</h:column>
+		
+		<h:column>
+			<center>
+			<f:facet name="header">Descripcion</f:facet>
+			#{propiedad.descripcion}
+			</center>
+		</h:column>
+		
+		
+	
+		
+		<h:column>
+		<center>
+			<f:facet name="header">Estado</f:facet>
+			#{propiedad.estado}
+			</center>
+		</h:column>
+		
+		<h:column>
+		<center>
+			<f:facet name="header">Tipo</f:facet>
+			#{propiedad.tipo}
+			</center>
+		</h:column>
+		
+		<h:column>
+		<center>
+			<f:facet name="header">Costo</f:facet>
+			#{propiedad.costo}
+			</center>
+		</h:column>
+		
+		
+		<h:column>
+		<center>
+			<f:facet name="header">Acciones</f:facet>
+			<!-- <h:commandButton action="#{propiedadController.loadDatosEditar(propiedad.codigo)}" value="Editar" /> -->
+			<a   href="EditarPropiedades.xhtml?id=#{propiedad.codigo}">Editar</a>
+			</center>
+		</h:column>
+		
+		<h:column>
+		<center>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton class="btn btn-danger"  action="#{propiedadController.eliminar(propiedad.codigo)}" value="Borrar" />
+		</center>
+		</h:column>
+	
+		
+	</h:dataTable>
+	<h:commandButton class="btn btn-success" action="CrearPropiedad" value="Agregar propiedad" />
+</h:form>
+		</ui:define>
+
+</ui:composition>

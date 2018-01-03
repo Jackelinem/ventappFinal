@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<!-- registrar Provincias -->
+			<ui:define name="titulo">CREAR IMAGENES</ui:define>
+			<ui:define name="contenido"> 
+			<h:form>
+		<h:messages globalOnly="true"/>
+		<h:panelGrid columns="3">
+			<h:outputLabel value="Codigo" for="codigoImagen"/>
+			<h:inputText value="#{imagenController.imagen.codigoImagen}" id="codigoImagen"/>
+			<h:message for="codigoImagen"/>
+			
+			<h:outputLabel value="Nombre" for="nombreImagen"/>
+			<h:inputText value="#{imagenController.imagen.nombreImagen}" id="nombreImagen" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres alfanuméricos."> 
+				<f:validateRegex pattern="[a-zA-Z0-9]+"/>
+			</h:inputText>
+			<h:message for="nombreImagen"/>
+			
+			<h:outputLabel value="Descripción" for="descripcionImagen"/>
+			<h:inputText value="#{imagenController.imagen.descripcionImagen}" id="descripcionImagen" required="true" requiredMessage="El campo está vacío." validatorMessage="Solamente caracteres alfanuméricos."> 
+				<f:validateRegex pattern="[a-zA-Z0-9]+"/>
+			</h:inputText>
+			<h:message for="descripcionImagen"/>
+			
+			<h:outputLabel value="Path" for="pathImagen"/>
+			<h:inputText value="#{imagenController.imagen.pathImagen}" id="pathImagen" required="true" requiredMessage="El campo está vacío."/> 
+			<h:message for="pathImagen"/>
+			
+			<h:commandButton action="#{imagenController.guardar()}" value="Guardar"  />
+		</h:panelGrid>
+		
+		<h:commandButton action="listadociudades" value="Listado" immediate="true"/>
+	</h:form>
+			</ui:define>
+			</ui:composition>

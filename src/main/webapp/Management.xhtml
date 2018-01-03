@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"	  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+<head>
+        <title>Administration</title><meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="resources/resourcescss/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="resources/css/matrix-login.css" />
+        <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'/>
+
+    </head>
+    
+    
+    <body>
+    
+    
+ <div id="loginbox">            
+           
+				
+			<div class="control-group normal_text"> <h3><img src="resources/img/logo.png" alt="Logo" /></h3> </div>
+               
+            
+                	<h:form>
+			   		<div class="control-group">
+			   				 <div class="controls">
+				   				 	<div class="main_input_box">
+				   		
+				   		 <span class="add-on bg_lg"><i class="icon-user"></i></span>
+				   			<h:inputText value="#{login.email}" id="Email"  class="form-control" placeholder="Email"/>
+						 </div>
+						</div>
+				</div>
+					
+					
+					<div class="control-group">
+                    	<div class="controls">
+                        	<div class="main_input_box">
+                        	<span class="add-on bg_ly"><i class="icon-lock"></i></span>
+					
+					<h:inputSecret value="#{login.pass}" id="pass" class="form-control" placeholder="Password" />
+					
+					<!--  <h:outputLabel value="pass"  for="pass"/> -->
+					
+					</div>
+					</div>
+					</div>
+			   	
+				 <div >
+					<span class="pull-right">
+					<h:commandButton action="#{login.submit()}" value=" Login as Admin"  class="btn-success"/>
+					</span>
+					
+				</div>
+				<p></p>
+				
+				<!-- <div class="" >
+				  <span class="pull-left">
+					<h:commandButton action="Register.xhtml" value="Register"  class="btn-info"/>
+					</span>
+					
+				</div> --> 
+				
+ 				</h:form>
+            
+                
+             
+        
+            
+
+       </div> 
+        <script src="resources/js/jquery.min.js"></script>  
+        <script src="resources/js/matrix.login.js"></script> 
+    </body>
+
+</html>

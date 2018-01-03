@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="/templateForm.xhtml">
+			
+		
+			
+			<!-- registrar Provincias -->
+			<ui:define name="titulo">LISTADO DE IMAGENES</ui:define>
+			<ui:define name="contenido"> 
+<h:form>
+<h:outputText value="No existen registros" rendered="#{empty imagenController.imagenes}"/>
+<br></br>
+	<h:dataTable value="#{imagenController.imagen}" var="imagen"  rendered="#{not empty imagenController.imagenes}"> <!--Rendered, si quiero se muestre  -->
+		<h:column>
+			<f:facet name="header">Codigo</f:facet>
+			#{imagen.codigoImagen}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+			#{imagen.nombreImagen}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Descripcion</f:facet>
+			#{imagen.descripcionImagen}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Path</f:facet>
+			#{imagen.pathImagen}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton action="#{imagenController.loadDatosEditar(imagen.codigoImagen)}" value="Editar" />
+			<a href="editarimagen.xhtml?id=#{imagen.codigoImagen}">Editar</a> <!-- Enviar parametro la cedula -->
+		</h:column>
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton action="#{imagenController.eliminar(imagen.nombreImagen)}" value="Borrar" />
+		</h:column>
+	</h:dataTable>
+	<h:commandButton action="crearimagen" value="Crear nueva imagen" />
+</h:form>
+</ui:define>
+			</ui:composition>
