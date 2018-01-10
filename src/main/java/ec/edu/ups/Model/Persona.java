@@ -28,6 +28,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 /*
  * Entidad principal de la persona que tendra propiedades
  */
@@ -59,9 +62,7 @@ public class Persona implements Serializable {
 	@Column (name="per_fecha", length=10)
 	private Date fecha;
 	
-	@ManyToOne
-	@JoinColumn(name="rol")
-	private Rol rol;
+	
 	
 	//relacion uno a muchos una persona puede tener varios telefonos
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -85,6 +86,10 @@ public class Persona implements Serializable {
 	@Column(name="per_clave")
 	private String password;
 	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="rol")
+	@JsonIgnore
+	private Rol rol;
 	
 	///getter and setter
 

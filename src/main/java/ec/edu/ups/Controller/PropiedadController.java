@@ -97,7 +97,7 @@ public class PropiedadController {
 		sector=new Sector();
 		propiedad =new Propiedad();
 		categoria=new Categoria();
-		//sector.addPropiedadr(new Propiedad());
+		sector.addPropiedadr(new Propiedad());
 		listaSectores= new ArrayList<SelectItem>();
 		
 		//carga los combos
@@ -167,14 +167,17 @@ public class PropiedadController {
  * metodo que me busca la persona mediante el correo 
  * para agregarle al objeto propietario
  */
-	public void añadirPersona() {
-		listaPersonas=perDao.getPersonasXemail(correo);
+	public void añadirPersona(Persona per) {
+		//listaPersonas=perDao.getPersonasXemail(correo);
 		
-		if(listaPersonas.size()!=0) {
-			persona=listaPersonas.get(0);
-			codigoPersona=persona.getCodigo();
-			propiedad.setPersona(persona);
-		}
+		//if(per!=null) {
+			this.setCodigoPersona(per.getCodigo());
+			System.out.println("cod persona "+per.getCodigo());
+			//persona=listaPersonas.get(0);
+			//codigoPersona=persona.getCodigo();
+			propiedad.setPersona(per);
+		//}
+		init();
 		
 	}
 	
@@ -184,6 +187,8 @@ public class PropiedadController {
 	private void cargarCategorias(){
 		listaCategorias = new ArrayList<SelectItem>();
 		categoriasDeBase=catDao.listadoCategoria();
+		if(categoriasDeBase!=null)
+			propiedad.setCategoria(categoriasDeBase.get(0));
 		for (int i = 0; i < categoriasDeBase.size(); i++) {
 			listaCategorias.add(new SelectItem(categoriasDeBase.get(i).getAlias(),categoriasDeBase.get(i).getDescripcion()));
 		}
@@ -221,6 +226,9 @@ public class PropiedadController {
 		
 		System.out.println("se obtiene ");
 			provincia=provDao.getProvincias(provi).get(0);
+			if(provincia.getSectores()!=null) {
+				propiedad.setSector(provincia.getSectores().get(0));
+			}
 			System.out.println("se obtiene "+provincia);
 			cargarSectores(provincia.getSectores());
 	
@@ -337,6 +345,13 @@ public class PropiedadController {
 			return null;
 		}
 		
+	}
+	
+	public void seleccionausuari(Persona p){
+		System.out.println("Usuario Seleccionado: " + p);
+		this.setPersona(p);
+		System.out.println("Usuario Seleccionado: ");
+		System.out.println("Nombre: "+this.getPersona().getNombres());
 	}
 
 	
@@ -502,6 +517,7 @@ public class PropiedadController {
 
 	public void setCodigoPersona(int codigoPersona) {
 		this.codigoPersona = codigoPersona;
+		System.out.println("cod persona +"+codigoPersona);
 	}
 
 

@@ -49,8 +49,8 @@
       </ul>
     </li>
     <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-    <li class=""><a title="" href="login.xhtml"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-  --></ul>
+    --><li class=""><a title="" href="login.xhtml"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+  </ul>
 </div>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
@@ -193,7 +193,103 @@
   <div id="footer" class="span12"> 2013 &amp; Matrix Admin. Brought to you by <a href="http://themedesigner.in">Themedesigner.in</a> </div>
 </div>
 
-<!--end-Footer-part-->
+
+		
+			
+			<div id="fade" class="black_overlay"></div>
+				<style>
+					.black_overlay {
+					  display: none;
+					  position: absolute;
+					  top: 0%;
+					  left: 0%;
+					  width: 100%;
+					  height: 100%;
+					  background-color: black;
+					  z-index: 1001;
+					  -moz-opacity: 0.8;
+					  opacity: .80;
+					  filter: alpha(opacity=80);
+					}
+					.white_content {
+					  display: none;
+					  position: absolute;
+					  top: 15%;
+					  left: 15%;
+					  width: 75%;
+					  height: 75%;
+					  padding: 16px;
+					  border: 16px solid orange;
+					  background-color: white;
+					  z-index: 1002;
+					  overflow: auto;
+					}
+					#close {
+					    display:block;
+    					position:absolute;
+    					top:-0px;
+    					right:-0px;
+    					width:27px;
+    					height:27px;
+    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
+
+					}
+					#close:hover {
+					    display:block;
+    					position:absolute;
+    					top:2px;
+    					right:2px;
+    					width:27px;
+    					height:27px;
+    					transition-property: height, width, box-shadow, background-color, font-size;
+  						box-shadow: 2px 2px 10px black, 0 0 0 9999px rgba(128,128,128,.5);
+    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
+					}
+					
+					#closeu {
+					    display:block;
+    					position:absolute;
+    					top:-0px;
+    					right:-0px;
+    					width:27px;
+    					height:27px;
+    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
+
+					}
+					#closeu:hover {
+					    display:block;
+    					position:absolute;
+    					top:2px;
+    					right:2px;
+    					width:27px;
+    					height:27px;
+    					transition-property: height, width, box-shadow, background-color, font-size;
+  						box-shadow: 2px 2px 10px black, 0 0 0 9999px rgba(128,128,128,.5);
+    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
+					}
+					#closec {
+					    display:block;
+    					position:absolute;
+    					top:-0px;
+    					right:-0px;
+    					width:27px;
+    					height:27px;
+    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
+
+					}
+					#closec:hover {
+					    display:block;
+    					position:absolute;
+    					top:2px;
+    					right:2px;
+    					width:27px;
+    					height:27px;
+    					transition-property: height, width, box-shadow, background-color, font-size;
+  						box-shadow: 2px 2px 10px black, 0 0 0 9999px rgba(128,128,128,.5);
+    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
+					}
+				</style>
+			<!--end-Footer-part-->
 
 <script src="resources/js/excanvas.min.js"></script> 
 <script src="resources/js/jquery.min.js"></script> 
@@ -241,5 +337,9 @@ function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
 </script>
+
+
+
+
 </body>
 </html>

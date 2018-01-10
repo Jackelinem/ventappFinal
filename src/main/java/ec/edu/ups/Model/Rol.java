@@ -28,8 +28,8 @@ public class Rol implements Serializable{
 
 	private String tipo;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="Rol", referencedColumnName="codigo")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="rol", referencedColumnName="codigo")
 	private List<Persona> personas;
 	
 	//getters and setters
@@ -44,6 +44,13 @@ public class Rol implements Serializable{
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+	
+	public List<Persona> getPersonas() {
+		return personas;
+	}
+	public void setPersonas(List<Persona> personas) {
+		this.personas = personas;
 	}
 	@Override
 	public String toString() {

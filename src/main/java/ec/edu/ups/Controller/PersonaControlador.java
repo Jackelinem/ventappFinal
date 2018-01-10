@@ -8,8 +8,10 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import ec.edu.ups.Dao.PersonaDao;
-import ec.edu.ups.Model.Persona;
-import ec.edu.ups.Model.Telefono;
+import ec.edu.ups.Dao.RolDao;
+import ec.edu.ups.Model.*;
+
+
 
 /*
  * controlador de Persona
@@ -21,6 +23,9 @@ public class PersonaControlador {
 	@Inject
 	private PersonaDao pdao;
 	
+	@Inject
+	private RolDao rdao;
+	
 	//instancia objeto persona
 	private Persona persona;
 	
@@ -30,9 +35,17 @@ public class PersonaControlador {
 	// campo id para saber si es registro nuevo
 	private int id;
 	
+	private Rol rol;
+	
+	private String campoNombre="";
+	private String campoApellido="";
+	private String campoEmail="";
+	
 	@PostConstruct
 	public void init(){
+		rol=new Rol();
 		persona = new Persona();
+		
 		loadPersonas();
 		persona.addTelefono(new Telefono());
 		
@@ -79,7 +92,7 @@ public class PersonaControlador {
 	 */
 	public void loadPersonas(){
 		
-		personas = pdao.listarPersona();
+		this.setPersonas(pdao.listarPersona(campoEmail,campoNombre,campoApellido));
 		
 	}
 	
@@ -130,11 +143,13 @@ public class PersonaControlador {
 	 */
 	public String guardar(){
 		
+		rol=rdao.leerRol("invitado");
 		System.out.println(persona);
+		persona.setRol(rol);
 		pdao.guardar(persona);
 		
 		loadPersonas();
-		return "index";
+		return "indexInvitado";
 	}
 	
 	/*
@@ -156,4 +171,39 @@ public class PersonaControlador {
 		persona.getTelefonos().add(new Telefono());
 		return null;
 	}
+
+	public String getCampoNombre() {
+		return campoNombre;
+	}
+
+	public void setCampoNombre(String campoNombre) {
+		this.campoNombre = campoNombre;
+	}
+
+	public String getCampoApellido() {
+		return campoApellido;
+	}
+
+	public void setCampoApellido(String campoApellido) {
+		this.campoApellido = campoApellido;
+	}
+
+	public String getCampoEmail() {
+		return campoEmail;
+	}
+
+	public void setCampoEmail(String campoEmail) {
+		this.campoEmail = campoEmail;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+	
+	
+	
 }

@@ -4,7 +4,7 @@
       			xmlns:h="http://java.sun.com/jsf/html"
 				template="templateForm.xhtml">
 				
-				<ui:define name="titulo">Publicar Propiedad</ui:define>
+				<ui:define name="titulo" >Publicar Propiedad</ui:define>
 				
 				<ui:define name="contenido">
 	
@@ -107,7 +107,8 @@
 		<div class="control-group"> 
 		<h:outputLabel class="control-label" value="Codigo cliente"  for="codigoCli"/>
 		<div class="controls">
-		<h:inputText value="#{propiedadController.codigoPersona}" id="cod" />
+		<h:inputText value="#{propiedadController.codigoPersona}" id="codigoCli" />	<a href="javascript:mostrarClientes();"><ajax action="#{personaControlador.loadPersonas()}"/>BUSCAR CLIENTE</a>
+		
 		</div>
 		<h:message for="codigoCli"/>
 		</div>
@@ -281,6 +282,74 @@
 			<h:commandButton class="btn btn-info" action="ListadoPropiedades" value="Listado" immediate="true"/>
 		</center>
 		</h:form>
+		
+		
+		
+		
+		
+		
+		
+								
+						  		
+		
 		</ui:define>
+		
+		<ui:define name="contenido2">
+			<h:form id="formcat">
+							<!--  <div class="6u 12u$(xsmall)">-->
+										<center>
+										<div class="control-group">
+											<h:outputLabel class="control-label"  value="NOMBRES"/>
+												<div class="controls">
+													<h:inputText class="span11" value="#{personaControlador.campoNombre}" id="nom">
+														<f:ajax  event="keyup" listener="#{personaControlador.loadPersonas()}" render="tabcli" execute="codC"></f:ajax>
+                    								</h:inputText>
+                    							</div>
+											</div>
+											<div class="control-group">
+												<h:outputLabel class="control-label"  value="APELLIDOS"/>
+												<div class="controls">
+													<h:inputText class="span11" value="#{personaControlador.campoApellido}" id="ape" >
+															<f:ajax  event="keyup" listener="#{personaControlador.loadPersonas()}" render="tabcli" execute="cedu"></f:ajax>
+                    								</h:inputText>
+                    							</div>
+											</div>
+											<div class="control-group">
+												<h:outputLabel class="control-label"  value="E-MAIL"/>
+												<div class="controls">
+													<h:inputText class="span11" value="#{personaControlador.campoEmail}" id="ema" onkeypress="if (event.keyCode == 13) {onchange(); return false; }">
+														<f:ajax  event="change" listener="#{personaControlador.loadPersonas()}" render="tabcli" execute="ncl"></f:ajax>
+                 									</h:inputText>
+                 								</div>															
+                    						</div>
+											</center>				
+								
+						        <h:dataTable id="tabcli" class="table table-bordered table-striped" var="cli" value="#{personaControlador.personas}" >
+						            <h:column>
+						                <f:facet name="header">Id</f:facet>
+						                #{cli.codigo}
+						            </h:column>
+						            <h:column>
+						                <f:facet name="header">Nombre</f:facet>
+						                #{cli.nombres}
+						            </h:column>
+						            <h:column>
+						                <f:facet name="header">RucCedula</f:facet>
+						                #{cli.apellido}
+						            </h:column>
+						            <h:column>
+						                <f:facet name="header">Email</f:facet>
+						                #{cli.email}
+						            </h:column>
+						            <h:column>
+						                <f:facet name="header">Elegir</f:facet>
+						                <h:commandButton action="#{propiedadController.añadirPersona(cli)}" value="Seleccionar" onclick="javascript:quitarClientes()"><f:ajax  execute="@form" render=":formulario:codigoCli"/></h:commandButton>
+						            </h:column>
+						          </h:dataTable>
+						          </h:form>
+		</ui:define>				  		
+
+
+		
 
 </ui:composition>
