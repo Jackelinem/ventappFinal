@@ -33,8 +33,7 @@ public class Sector implements Serializable {
 	private String alias;
 	
 	//relacion uno a muchos un sector puede tener varias propiedades
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="sector", referencedColumnName="codigo")
+	@OneToMany(mappedBy="sector")
 	private List<Propiedad> propiedades;
 	
 	//getters and setters

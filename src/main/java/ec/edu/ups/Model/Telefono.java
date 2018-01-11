@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /*
  * entidad telefono relacionada con las personas
  */
@@ -33,6 +35,7 @@ public class Telefono implements Serializable{
 	//relacion muchos a uno varios telefonos pueden pertenecer a una Persona
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="persona")
+	@JsonIgnore
 	private Persona persona; 
 	
 	//getters and setters

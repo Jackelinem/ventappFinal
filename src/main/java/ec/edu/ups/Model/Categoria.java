@@ -39,8 +39,7 @@ public class Categoria implements Serializable{
 	
 	
 	//relacion uno a muchos una categoria puede estar en muchas propiedades
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="categoria", referencedColumnName="codigo")
+	@OneToMany(mappedBy="categoria")
 	private Set<Propiedad> propiedades=new HashSet<>();
 	
 	

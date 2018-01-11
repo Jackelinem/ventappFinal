@@ -77,6 +77,23 @@ public class RolDao {
 		
 	}
 	
+	public Rol leerRol(String ro){
+		try {
+			String jpql = "Select p From Rol p where tipo = :ro";
+			System.out.println(jpql);
+			Query query = em.createQuery(jpql,Rol.class);
+			query.setParameter("ro", ro);
+			Rol r= (Rol) query.getSingleResult();
+			
+			System.out.println("Rol obtenido  "+r);
+			return r;
+		}
+		catch (Exception e){}
+		
+		return null;
+		
+	}
+	
 	
 	
 

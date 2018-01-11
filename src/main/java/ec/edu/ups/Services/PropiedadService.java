@@ -1,5 +1,7 @@
 package ec.edu.ups.Services;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -10,10 +12,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import ec.edu.ups.Dao.CategoriaDao;
 import ec.edu.ups.Dao.PropiedadDao;
+import ec.edu.ups.Dao.SectorDao;
 import ec.edu.ups.Data.PropiedadRepository;
+import ec.edu.ups.Model.Categoria;
 import ec.edu.ups.Model.Persona;
 import ec.edu.ups.Model.Propiedad;
+import ec.edu.ups.Model.Sector;
 import ec.edu.ups.Utils.Response;
 
 @Path("/propiedad")
@@ -23,6 +29,11 @@ public class PropiedadService {
 	@Inject
 	PropiedadDao propiedadDao;
 	
+	@Inject
+	CategoriaDao cdao;
+	
+	@Inject
+	SectorDao sdao;
 	//private Propiedad propiedad;
 	
 	@Inject
@@ -85,7 +96,56 @@ public class PropiedadService {
 		return propiedad;
 	}
 
+	@GET
+	@Path("/categoriaid")
+	@Produces("application/json")
+	public Categoria getCategoriaId(@QueryParam("id") int id) {
+		Categoria cat = cdao.read(id);
+		System.out.println(cat);
+		return cat;
+	}
 	
+	@GET
+	@Path("/sectorid")
+	@Produces("application/json")
+	public Sector getSectorId(@QueryParam("id") int id) {
+		Sector s = sdao.leer(id);
+		System.out.println(s);
+		return s;
+	}
+
+	@GET
+	@Path("/sectores")
+	@Produces("application/json")
+	public List<Sector> getSectores() {
+		List<Sector> sectores = sdao.getSectores();		
+		return sectores;
+	}
+	
+	@GET
+	@Path("/categorias")
+	@Produces("application/json")
+	public List<Categoria> getCategorias() {
+		List<Categoria> categorias = cdao.getCategorias2();		
+		return categorias;
+	}
+	
+	@GET
+	@Path("/propiedades")
+	@Produces("application/json")
+	public List<Propiedad> getPropiedades() {
+		List<Propiedad> propiedades = propiedadDao.listadoPropiedades();		
+		return propiedades;
+	}
+	
+	@GET
+	@Path("/propiedadid")
+	@Produces("application/json")
+	public Propiedad getPropiedadId(@QueryParam("id") int id) {
+		Propiedad s = propiedadDao.leer(id);
+		System.out.println(s);
+		return s;
+	}
 	
 	
 	

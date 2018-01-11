@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:o="http://java.sun.com/jsf/html">
+	
+	<h:head>
+		<div class="title">
+		<div id="fh5co-logo" class="text-center"><a href="indexG.jsf"><img src="resources/img/logo.png" alt="Image"/></a></div>
+    	<label class="titlee" style="color: white;"><font size="6">Mapa de Ubicacion</font></label>
+    	</div>
+    	<link rel="stylesheet" type="text/css" media="all" href="resources/css/infoWindow.css"/>
+    	<script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>    
+    	<style>
+      		#map {
+      			height: 95%;
+      		}
+      		html, body {
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+      		}
+      		.title{
+      			text-align: center;
+      			width: 100%;
+      			color: blue;
+      			background-color: rgba(40,57,101,.9);
+      		}
+    	</style>
+  	</h:head>
+  
+  	<h:body>
+    	<div id="map"></div>
+		<h:button>
+		</h:button>
+		<script src="resources/js/geo.js">
+</script>
+	   <h:outputText id="tipo" value="#{admin.tipouser}"></h:outputText>
+	   
+	   <input type="text" id="latitud" ></input>
+	   <input type="text" id="longitud" ></input>
+	   <!-- <h:outputText id="latitud" value="#{admin.latitud}"></h:outputText>
+	   <h:outputText id="longitud" value="#{admin.longitud}"></h:outputText>
+ -->
+		<script 
+    		src="https://maps.googleapis.com/maps/api/js?key= AIzaSyBS0zuLmLKaB_9hJ_2GCuBwrY10js68UTM &amp;callback=initMap">
+    	</script>
+    	
+    	<!-- tabla de tours -->
+    	<h:form id="formPro" style="display: none">
+        <h:dataTable id="propiedades" var="prop" value="#{propiedadController.listpropiedades}" styleClass="simpletablestyle">
+            <h:column class="col">
+                <f:facet name="header">Id</f:facet>
+                #{prop.codigo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                #{prop.descripcion}
+            </h:column>
+            <h:column>
+                <f:facet name="header">direccion</f:facet>
+                #{prop.direccion}
+            </h:column>
+            <h:column>
+                <f:facet name="header">latitud</f:facet>
+                #{prop.latitud}
+            </h:column>
+            <h:column>
+                <f:facet name="header">longitud</f:facet>
+                #{prop.longuitud}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Categoria</f:facet>
+                #{prop.categoria.descripcion}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Propietario</f:facet>
+                #{prop.persona.nombres} #{prop.persona.apellido}
+            </h:column>
+            <h:column>
+                <f:facet name="header">icon</f:facet>
+                <h:inputText value="#{propiedadController.toBase64(prop)}"/>
+            </h:column>
+          </h:dataTable>
+                    </h:form>
+  	</h:body>
+</html>

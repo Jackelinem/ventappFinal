@@ -63,7 +63,10 @@ public class PropiedadDao {
 	 */
 	public Propiedad leer(int codigo) {
 		Propiedad p =em.find(Propiedad.class, codigo);
-		
+		p.getImagenes().size();
+		p.getPersona().getNombres();
+		p.getPersona().getApellido();
+		p.getPersona().getTelefonos().size();
 		return p;
 	}
 	

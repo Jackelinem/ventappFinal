@@ -4,7 +4,8 @@
       xmlns:composite="http://java.sun.com/jsf/composite"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 <ui:composition template="template.xhtml">
 
 <ui:define name="contenido">
@@ -65,6 +66,13 @@
 			#{propiedad.costo}
 			</center>
 		</h:column>
+		<h:column>
+		<center>
+			<f:facet name="header"></f:facet>
+			<a   href="PropiedadDetalle.xhtml?id=#{propiedad.codigo}">Ir</a>
+			
+			</center>
+		</h:column>
 		
 	
 		
@@ -101,6 +109,7 @@
 	</div>
 	<div> 
         <h:form  class="form-horizontal">
+       										
             <div class="control-group">
               <label class="control-label">Comenta................. :</label>
               <div class="controls">

@@ -75,6 +75,19 @@ public class CategoriaDao {
 			
 		}
 		
+		public List<Categoria> getCategorias2(){
+			String jpql = "SELECT distinct c FROM Categoria c";
+			Query query = em.createQuery(jpql, Categoria.class);
+			List<Categoria> categorias = query.getResultList();
+			return categorias;
+		}
+		
+	
+		public Categoria read(int id){
+			Categoria categoria = em.find(Categoria.class, id);
+			categoria.getPropiedades().size();
+			return categoria;
+		}
 		
 		
 	

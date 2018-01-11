@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:f="http://java.sun.com/jsf/core"
+      			xmlns:h="http://java.sun.com/jsf/html"
+				template="templateFormInvitado.xhtml">
+			
+		
+			
+			<ui:define name="titulo">Detalle de la Propiedad</ui:define>
+			
+			<ui:define name="contenido">
+			<f:metadata>
+
+				<f:viewParam name="id" value="#{propiedadController.id}" />
+				
+			</f:metadata>
+          <h:form  class="form-horizontal">
+          <h:message globalOnly="true"/>
+            <div class="control-group">
+              <label class="control-label">Descripcion</label>
+              <div class="controls">
+              	<h:outputText class="span11" value="#{propiedadController.propiedad.descripcion}"></h:outputText>
+                
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Direccion :</label>
+              <div class="controls">
+              	<h:outputText class="span11" value="#{propiedadController.propiedad.direccion}"></h:outputText>
+                
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label"># num imagenes :</label>
+              <div class="controls">
+              	<h:outputText class="span11" value="#{propiedadController.propiedad.imagenes.size()}"></h:outputText>
+                
+              </div>
+            </div>
+            
+            <div class="widget-box">
+          <div class="widget-title">
+            <h5>Imagenes</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <h:dataTable id="tabImg" class="table table-bordered table-striped" var="fotos" value="#{propiedadController.propiedad.imagenes}" styleClass="employeeTable"
+					         headerClass="employeeTableHeader"
+					         rowClasses="employeeTableOddRow,employeeTableEvenRow"  width="100%" align="center">
+		
+							<h:column>
+							<center>
+							<f:facet name="header">Descripcion</f:facet>
+							#{fotos.descripcionImagen}
+							</center>
+							</h:column>
+							<h:column>
+							<center>
+							<f:facet name="header">Imagen</f:facet>
+							<IMG alt="" src="#{propiedadController.imageToBase64(fotos.img)}" />
+							</center>
+							</h:column>
+							
+						</h:dataTable>
+			
+          </div>
+          
+        </div>
+            <div>
+        		<h:commandButton class="btn btn-info" value="SALIR" action="index.xhtml"/>
+        	</div>
+            
+          </h:form>
+			
+		</ui:define>
+</ui:composition>
+

@@ -65,10 +65,15 @@ public class PersonaDao {
 	/*
 	 * metodo de listar personas
 	 */
-	public List<Persona> listarPersona(){
-		String jpql = "SELECT p FROM Persona p";
-		Query query = em.createQuery(jpql, Persona.class);
-		List<Persona> list = query.getResultList();
+	public List<Persona> listarPersona(String emp, String nom, String ap){
+		String sql = "SELECT p FROM Persona p where email like :emp "
+				+ "and nombres like :nom "
+				+ "and apellido like :ap";
+		Query q = em.createQuery(sql,Persona.class);
+		q.setParameter("emp", emp+"%");
+		q.setParameter("nom", nom+"%");
+		q.setParameter("ap", ap+"%");
+		List<Persona> list = q.getResultList();
 		return list;
 	}
 	

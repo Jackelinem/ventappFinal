@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,6 +27,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /*
  * Entidad principal de la persona que tendra propiedades
@@ -59,7 +63,16 @@ public class Persona implements Serializable {
 	private Date fecha;
 	
 	
-
+	
+	//relacion uno a muchos una persona puede tener varios telefonos
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="Persona", referencedColumnName="codigo")
+	@JsonIgnore
+	private Set<Telefono> telefonos=new HashSet<>();
+	
+	//relacion uno a muchos una persona puede tener varias propiedades
+	@OneToMany(mappedBy="persona")
+	private Set<Propiedad> propiedades=new HashSet<>();
 	
 
 	@Size(min=4,max=50)
@@ -68,31 +81,29 @@ public class Persona implements Serializable {
 	
 	@Email
 	@Column(name="per_email",unique=true)
-	//@UniqueConstraint(columnNames = { "email" })
 	private String email;
 	
 	@Column(name="per_clave")
 	private String password;
 	
-	
-	
-	//relacion uno a muchos una persona puede tener varios telefonos
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="Persona", referencedColumnName="codigo")
-	private Set<Telefono> telefonos=new HashSet<>();
-	
-	//relacion uno a muchos una persona puede tener varias propiedades
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="Persona", referencedColumnName="codigo")
-	private Set<Propiedad> propiedades=new HashSet<>();
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="rol")
+	@JsonIgnore
+	private Rol rol;
 	
 	///getter and setter
 
 	
-	
-	
 	public int getCodigo() {
 		return codigo;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	public Set<Telefono> getTelefonos() {
