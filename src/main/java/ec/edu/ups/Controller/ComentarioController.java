@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import ec.edu.ups.Dao.ComentariosDAO;
 //import ec.edu.ups.Dao.SectorDAO;
 import ec.edu.ups.Model.Comentarios;
-import ec.edu.ups.Model.Sector;
 
 /*
  * controlador de comentario
