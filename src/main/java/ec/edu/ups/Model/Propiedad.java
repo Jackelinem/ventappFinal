@@ -55,18 +55,20 @@ public class Propiedad implements Serializable{
 	
 	
 	// relacion bidireccional muchas propiedades pueden pertenecer a un sector
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="sector")
+	@JsonIgnore
 	private Sector sector;
 	
 	// relacion bidireccional muchas propiedades pueden pertenecer a una persona
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="persona")
 	private Persona persona;
 	
 	// relacion bidireccional muchas propiedades pueden pertenecer a una categoria
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="categoria")
+	@JsonIgnore
 	private Categoria categoria;
 	
 	

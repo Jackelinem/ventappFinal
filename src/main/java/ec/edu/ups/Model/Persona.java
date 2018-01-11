@@ -67,11 +67,11 @@ public class Persona implements Serializable {
 	//relacion uno a muchos una persona puede tener varios telefonos
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="Persona", referencedColumnName="codigo")
+	@JsonIgnore
 	private Set<Telefono> telefonos=new HashSet<>();
 	
 	//relacion uno a muchos una persona puede tener varias propiedades
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="Persona", referencedColumnName="codigo")
+	@OneToMany(mappedBy="persona")
 	private Set<Propiedad> propiedades=new HashSet<>();
 	
 
