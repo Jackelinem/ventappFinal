@@ -35,13 +35,11 @@ public class WSLogin {
 					System.out.println("redireccion");
 					return"index";
 					}
+				return "no existe user";
 			
-					
-				return "No existe user";
 			}
 	
-			
-			
 	
 	
 }
+

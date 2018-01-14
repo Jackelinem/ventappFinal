@@ -1,4 +1,4 @@
-package ec.edu.ups.Services;
+package ec.edu.ups.Utils;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
