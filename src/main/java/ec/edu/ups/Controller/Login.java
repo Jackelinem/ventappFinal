@@ -54,14 +54,15 @@ public class Login {
 		try {
 			persona = personaDao.buscarUser(this.getEmail(),this.getPass());
 			System.out.println("entro "+persona.getRol().getTipo());
-			 if(persona != null) {
-				 if(persona.getRol()==null)
+			
+			if(persona != null) {
+				/* if(persona.getRol()==null)
 					 return"index";
 				 if(persona.getRol().getTipo().equals("invitado")) {
 					 System.out.println("redireccion Invitado");
 					 return"indexInvitado";
 					 
-				 }
+				 }*/
 				 System.out.println("redireccion Admin ");
 				 return"index";
 			

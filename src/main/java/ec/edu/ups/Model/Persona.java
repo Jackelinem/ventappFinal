@@ -28,6 +28,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -60,6 +61,7 @@ public class Persona implements Serializable {
 	
 	@Temporal (value = TemporalType.DATE)
 	@Column (name="per_fecha", length=10)
+	//@JsonFormat(pattern = "MMM DD, YYYY HH:MM:SS zzz")
 	private Date fecha;
 	
 	
@@ -72,6 +74,7 @@ public class Persona implements Serializable {
 	
 	//relacion uno a muchos una persona puede tener varias propiedades
 	@OneToMany(mappedBy="persona")
+	@JsonIgnore
 	private Set<Propiedad> propiedades=new HashSet<>();
 	
 

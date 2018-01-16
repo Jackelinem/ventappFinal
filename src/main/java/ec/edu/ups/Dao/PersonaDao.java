@@ -150,4 +150,11 @@ public class PersonaDao {
 			actualizar(persona);
 		}
 	}
+	
+	public Persona listaPropiedadesbyUser(int codigo){
+		Persona p = em.find(Persona.class, codigo);
+		p.getPropiedades().size();
+		return p;
+		
+	}
 }

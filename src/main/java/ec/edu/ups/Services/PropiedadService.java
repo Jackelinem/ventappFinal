@@ -1,6 +1,7 @@
 package ec.edu.ups.Services;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -13,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import ec.edu.ups.Dao.CategoriaDao;
+import ec.edu.ups.Dao.PersonaDao;
 import ec.edu.ups.Dao.PropiedadDao;
 import ec.edu.ups.Dao.SectorDao;
 import ec.edu.ups.Data.PropiedadRepository;
@@ -39,6 +41,8 @@ public class PropiedadService {
 	@Inject
 	PropiedadRepository repository;
 	
+	@Inject 
+	PersonaDao personaDao;
 	
 	@POST
 	@Path("/register")
@@ -78,11 +82,14 @@ public class PropiedadService {
 		return propiedad;
 	}
 	
-	
-	
-	
-	
-	
+	@GET
+	@Path("/listabyUser")//cualquier codigo que sea int 
+	@Produces(MediaType.APPLICATION_JSON)
+	public Set<Propiedad> listadopropiedad(@QueryParam("id") int id){
+		Set<Propiedad> ltsPropiedad= personaDao.listaPropiedadesbyUser(id).getPropiedades();
+		return ltsPropiedad;
+	}
+
 	//desarrollo
 	
 	@GET

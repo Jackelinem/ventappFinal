@@ -1,5 +1,10 @@
 package ec.edu.ups.Controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +20,7 @@ import javax.servlet.http.Part;
 import com.lowagie.text.pdf.codec.Base64;
 
 import ec.edu.ups.Dao.CategoriaDao;
+import ec.edu.ups.Dao.ImagenDAO;
 import ec.edu.ups.Dao.PersonaDao;
 import ec.edu.ups.Dao.PropiedadDao;
 import ec.edu.ups.Dao.ProvinciaDAO;
@@ -73,6 +79,10 @@ public class PropiedadController {
 	private List<SelectItem> listaCategorias;
 	private String cat;
 	
+	private Part uploadedFile;
+	private String uploads = "C:\\images";
+	private String filename;
+	
 	//imagen
 	private Part file;
 	private String descImg;
@@ -89,6 +99,8 @@ public class PropiedadController {
 	@Inject
 	private CategoriaDao catDao;
 	
+	@Inject
+	private ImagenDAO imagenDAO;
 	
 	@PostConstruct
 	public void init() {
@@ -286,10 +298,41 @@ public class PropiedadController {
 	 * metodo que me permite guardar la propiedad una ves que se han cargado las entidades relacionadas
 	 */
 	public String savePropiedad() {
-		System.out.println("Sector alias"+propiedad.getCategoria().getDescripcion());
 		
-		propiedadDao.guardar(propiedad);
-		init();
+		try (InputStream input = uploadedFile.getInputStream()) {
+			
+			
+	   		 //propiedad.setPathImg(uploadedFile.getSubmittedFileName());
+	   		 filename = Paths.get(uploadedFile.getSubmittedFileName()).getFileName().toString();
+	   		 //filename = uploadedFile.getSubmittedFileName();
+	   		 Files.copy(input, new File(uploads, filename).toPath());
+	   		 //System.out.println(prop.toString());
+	   		// pDAO.insertar(prop);
+	   		 
+	   		 System.out.println(""+filename+" - "+uploadedFile.getSubmittedFileName());
+	   		Imagen img = new Imagen();
+			img.setDescripcionImagen(uploadedFile.getSubmittedFileName());
+			img.setNombreImagen(filename);
+			
+			System.out.println(img.toString());
+			imagenDAO.insertar(img);
+			/*
+			List<Imagen> ltsimg = new ArrayList<>();
+			ltsimg.add(img);
+			propiedad.setImagenes(ltsimg);
+			
+			//propiedad.
+			
+	   		System.out.println("Sector alias"+propiedad.getCategoria().getDescripcion());
+			
+			propiedadDao.guardar(propiedad);
+			/*
+			init();
+			return null;
+		 }
+		 catch (IOException e) {
+		     e.printStackTrace();
+		 }
 		return null;
 	}
 	
@@ -354,6 +397,20 @@ public class PropiedadController {
 		System.out.println("Nombre: "+this.getPersona().getNombres());
 	}
 
+	
+	public void saveFile(){
+	   	 try (InputStream input = uploadedFile.getInputStream()) {
+	   		 //prop.setPathImg(uploadedFile.getSubmittedFileName());
+	   		 filename = Paths.get(uploadedFile.getSubmittedFileName()).getFileName().toString();
+	   		 //filename = uploadedFile.getSubmittedFileName();
+	   		 Files.copy(input, new File(uploads, filename).toPath());
+	   		 //System.out.println(prop.toString());
+	   		// pDAO.insertar(prop);
+		 }
+		 catch (IOException e) {
+		     e.printStackTrace();
+		 }
+	 }
 	
 	//getters and setters
 	

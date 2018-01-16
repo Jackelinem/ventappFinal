@@ -71,6 +71,7 @@ public class Propiedad implements Serializable{
 	@JsonIgnore
 	private Categoria categoria;
 	
+
 	
 	private double longuitud;
 	
@@ -80,6 +81,11 @@ public class Propiedad implements Serializable{
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="propiedad", referencedColumnName="codigo")
 	private List<Imagen> imagenes;
+	
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="comentarios", referencedColumnName="codigo")
+	private List<Comentarios> ltscomentarios;
 
 // getters and setters
 	public int getCodigo() {
@@ -232,6 +238,25 @@ public class Propiedad implements Serializable{
 			
 		
 	
+	}
+
+
+	public List<Comentarios> getLtscomentarios() {
+		return ltscomentarios;
+	}
+
+
+	public void setLtscomentarios(List<Comentarios> ltscomentarios) {
+		this.ltscomentarios = ltscomentarios;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Propiedad [codigo=" + codigo + ", direccion=" + direccion + ", urlVideo=" + urlVideo + ", descripcion="
+				+ descripcion + ", estado=" + estado + ", tipo=" + tipo 
+				+ ", longuitud=" + longuitud + ", latitud="
+				+ latitud + "]";
 	}
 	
 	

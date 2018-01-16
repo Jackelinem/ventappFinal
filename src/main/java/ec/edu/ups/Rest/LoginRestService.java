@@ -43,36 +43,18 @@ public class LoginRestService {
 			@QueryParam("email")String email, //parametros del login 
 			@QueryParam("pass") String password){
 		
-
 		Persona persona = repository.findByEmail(email,password);
 		
-		System.out.println("Autenticado: " + persona.toString());
-		System.out.println("authentication");
-		/*
-			persona = new Persona();
-			persona = personaDao.buscarUser(email,password);
-			try{
-			 if(persona != null)
-				{
-
-				System.out.println("Autenticado: " + persona.toString());
-				System.out.println("authentication");*/
-				
-				//verify();
-
-				return persona;
-				}
-			//}
-		/*	catch (Exception e){
-				
-				System.out.println("user no existe");
-			
-				
-			}*/
-			
-		//	return null;
+		if(persona!=null){
+			System.out.println("Autenticado: " + persona.toString());
+			System.out.println("authentication");
+			return persona;
+		}else{
+			return null;
+		}
 		
-//	}
+	}
+
 	
 	
 

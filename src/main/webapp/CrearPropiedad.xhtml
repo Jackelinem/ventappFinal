@@ -8,7 +8,7 @@
 				
 				<ui:define name="contenido">
 	
-	<h:form id="formulario" class="form-horizontal" enctype="multipart/form-data" >
+	<h:form id="formulario" class="form-horizontal" enctype="multipart/form-data" prependId="false">
 	<div class="control-group">
 			<h:outputLabel class="control-label" value="direccion:"  for="direccion"/>
 				<div class="controls">
@@ -124,6 +124,13 @@
 				<f:ajax render="tabImg" execute="desImg img"></f:ajax>
 			</h:commandButton>
 			
+		</div>
+		</div>
+		
+		<div class="control-group">
+		<div class="controls">
+			<h:outputText value="Archivo: "></h:outputText>
+			<h:inputFile value="#{propiedadControler.uploadedFile}"  />
 		</div>
 		</div>
 		

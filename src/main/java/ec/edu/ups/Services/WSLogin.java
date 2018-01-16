@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
 
 import ec.edu.ups.Dao.PersonaDao;
 import ec.edu.ups.Model.Persona;
-
+/*
 @Path("/login")
 public class WSLogin {
 	
@@ -42,4 +42,4 @@ public class WSLogin {
 	
 	
 }
-
+*/

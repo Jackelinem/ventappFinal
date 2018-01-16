@@ -23,17 +23,20 @@ public class ComentariosDAO {
 	 * metodo de guardar o actualizar nuevo categoria
 	 */
 	public void save(Comentarios comentarios){
-		if(em.find(Comentarios.class, comentarios.getId())==null)
+		if(em.find(Comentarios.class, comentarios.getId())==null){
+			System.out.println("inserta");
 			insertar(comentarios);
-		else
+		}else{
+			System.out.println("actualiza");
 			actualizar(comentarios);
+		}
 	}
 	
 	/*
 	 * metodo de insertar nuevo categoria
 	 */
 	public void insertar(Comentarios comentarios){
-		em.persist(comentarios);
+		em.merge(comentarios);
 	}
 	
 	/*

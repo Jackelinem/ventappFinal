@@ -2,11 +2,17 @@ package ec.edu.ups.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /*
  * Entidad Comentarios que se realizaran en las propiedades
@@ -29,7 +35,9 @@ public class Comentarios implements Serializable {
 	@Column(name="com_comentario")
 	private String comentario;
 	
-	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="comentarios")
+	private Propiedad propiedad;
 	
 	//getters and setters
 	
@@ -50,6 +58,19 @@ public class Comentarios implements Serializable {
 		this.comentario = comentario;
 	}
 
+	public Propiedad getPropiedad() {
+		return propiedad;
+	}
 
+	public void setPropiedad(Propiedad propiedad) {
+		this.propiedad = propiedad;
+	}
+
+	@Override
+	public String toString() {
+		return "Comentarios [id=" + id + ", comentario=" + comentario + ", propiedad=" + propiedad.toString() + "]";
+	}
+
+	
 
 }

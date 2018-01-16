@@ -83,7 +83,7 @@ public class UserRestService {
 	@Path("/register")
 	@Produces("application/json")
 	@Consumes("application/json")
-	public Response register(Persona user) {
+	public boolean register(Persona user) {
 		Response.ResponseBuilder builder = null;
 		//Response rs= new Response();
 		
@@ -92,40 +92,29 @@ public class UserRestService {
 			// Validates member using bean validation
 						System.out.println(user.getPassword().toString());
 						//user.setPassword(new Sha256Hash(user.getPassword()).toHex());
-						System.out.println(user.getPassword().toString());
+						System.out.println(user.toString());
 						validateUser(user);
 			personaDao.guardar(user);
 			
-			// Create an "ok" response
-			builder = Response.ok();
-			
-			/*rs.setCodigo(405);
-			rs.setMsj("datos guardados");
-			return rs;*/		
-		}
-		//catch (Exception e) {
-			// TODO: handle exception
-			/*rs.setCodigo(402);
-			rs.setMsj("error al inserar");
-			return rs;*/
-		//}
-		
-		
-		catch (ConstraintViolationException ce) {
+			return true;
+				
+		}catch (ConstraintViolationException ce) {
             // Handle bean validation issues
-            builder = createViolationResponse(ce.getConstraintViolations());
+			return false;
+            //builder = createViolationResponse(ce.getConstraintViolations());
         } catch (ValidationException e) {
             // Handle the unique constrain violation
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("email", "Este email ya se encuentra en uso");
             builder = Response.status(Response.Status.CONFLICT).entity(responseObj);
+            return false;
         } catch (Exception e) {
             // Handle generic exceptions
             Map<String, String> responseObj = new HashMap<>();
-            responseObj.put("error", e.getMessage());
-            builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+            return false;
+            //responseObj.put("error", e.getMessage());
+            //builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
         }
-		return builder.build();
 	}
 		
 	

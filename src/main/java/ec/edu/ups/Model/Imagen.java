@@ -82,6 +82,12 @@ public class Imagen implements Serializable{
 		this.img = img;
 	}
 
+	@Override
+	public String toString() {
+		return "Imagen [codigoImagen=" + codigoImagen + ", nombreImagen=" + nombreImagen + ", descripcionImagen="
+				+ descripcionImagen + "]";
+	}
+
 	
 	
 }
